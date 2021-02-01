@@ -54,53 +54,27 @@ function App() {
         title='Редактировать профиль'
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        children={
+          <>
+            <input type="text" name="popupInputName" placeholder="Введите Ваше имя"
+              className="popup-${props.name}__text popup__text popup-${props.name}__text_type_name popup__input" id="${props.name}-name" required
+              minlength="2" maxlength="40" />
+            <span id="${props.name}-name-error" className="popup__text-error"></span>
+            <input type="text" name="popupInputJob" placeholder="Введите Вашу профессию"
+              className="popup-${props.name}__text popup__text popup-${props.name}__text_type_profession popup__input" id="${props.name}-job"
+              required minlength="2" maxlength="200" />
+            <span id="${props.name}-job-error" className="popup__text-error"></span>
+          </>
+        }
       />
+
       <PopupWithForm
         name='card'
         title='Новое место'
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
-      />
-      <PopupWithForm
-        name='delete'
-        title='Вы уверены?'
-      />
-      <PopupWithForm
-        name='avatar'
-        title='Обновить аватар'
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-      />
-      <ImagePopup
-        card={selectedCard}
-        onClose={closeAllPopups}
-      />
-      {/*  
-      <section className="popup-profile popup root__popup">
-        <div className="popup-profile__container popup__container">
-          <button type="button" className="popup__button-cross popup-profile__button-cross button"></button>
-          <h3 className="popup-profile__title popup__title">Редактировать профиль</h3>
-          <form action="#" name="popupProfileForm" className="popup-profile__form popup__form">
-
-            <input type="text" name="popupInputName" placeholder="Введите Ваше имя"
-              className="popup-profile__text popup__text popup-profile__text_type_name popup__input" id="profile-name" required
-              minlength="2" maxlength="40" />
-            <span id="profile-name-error" className="popup__text-error"></span>
-
-            <input type="text" name="popupInputJob" placeholder="Введите Вашу профессию"
-              className="popup-profile__text popup__text popup-profile__text_type_profession popup__input" id="profile-job"
-              required minlength="2" maxlength="200" />
-            <span id="profile-job-error" className="popup__text-error"></span>
-            <button type="submit" className="popup-profile__btn-add popup__btn-add">Сохранить</button>
-          </form>
-        </div>
-      </section>
-
-      <section className="popup-card popup root__popup">
-        <div className="popup__container">
-          <button type="button" className="popup__button-cross popup-card__button-cross button"></button>
-          <h3 className="popup__title popup-card__title">Новое место</h3>
-          <form action="#" name="popupCardForm" className="popup-card__form popup__form">
+        children={
+          <>
             <input type="text" name="popupInputPlace" placeholder="Название"
               className="popup-card__text popup__text popup-card__text_type_place popup__input" id="card-place" required
               minlength="2" maxlength="30" />
@@ -108,36 +82,30 @@ function App() {
             <input type="url" name="popupInputLink" placeholder="Ссылка на картинку"
               className="popup-card__text popup__text popup-card__text_type_link popup__input" id="card-link" required />
             <span id="card-link-error" className="popup__text-error"></span>
-            <button type="submit" className="popup-card__btn-add popup__btn-add">Сохранить</button>
-          </form>
-        </div>
-      </section>
+          </>
+        }
+      />
 
-      <section className="popup-delete-card popup root__popup">
-        <div className="popup__container">
-          <button type="button" className="popup-delete-card__button-cross popup__button-cross button"></button>
-          <h3 className="popup-delete-card__title popup__title">Вы уверены?</h3>
-          <form action="#" name="popupCardDelete" className="popup-delete-card__form popup__form">
-            <button type="submit" className="popup-delete-card__btn-add popup__btn-add">Да</button>
-          </form>
-        </div>
-      </section>
-
-      <section className="popup-avatar popup root__popup">
-        <div className="popup__container">
-          <button type="button" className="popup-avatar__button-cross popup__button-cross button"></button>
-          <h3 className="popup-avatar__title popup__title">Обновить аватар</h3>
-          <form action="#" name="popupAvatar" className="popup-avatar__form popup__form">
+      <PopupWithForm
+        name='avatar'
+        title='Обновить аватар'
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        children={
+          <>
             <input type="url" name="avatarInputLink" placeholder="Ссылка на картинку"
               className="popup-avatar__text popup__text popup-avatar__text_type_link popup__input" id="avatar-link" required />
             <span id="avatar-link-error" className="popup__text-error"></span>
-            <button type="submit" className="popup-avatar__btn-add popup__btn-add">Да</button>
-          </form>
-        </div>
-      </section>
-*/}
+          </>
+        }
+      />
 
-    </div>
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
+
+    </div >
   );
 }
 

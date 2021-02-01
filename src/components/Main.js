@@ -15,14 +15,16 @@ function Main(props) {
         setUserName(userData.name);
         setUserDescription(userData.about);
         setUserAvatar(userData.avatar);
-      });
+      })
+      .catch((err) => console.log("Ошибка при загрузке данных", err));
   })
 
   React.useEffect(() => {
     api.getCards()
       .then((initialCards) => {
         setCards(initialCards);
-      });
+      })
+      .catch((err) => console.log("Ошибка при загрузке данных", err));
   }, [])
 
 
