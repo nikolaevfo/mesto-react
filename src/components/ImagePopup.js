@@ -1,12 +1,13 @@
-function ImagePopup() {
+function ImagePopup(props) {
   return (
-    <section className="root__popup popup-image popup popup_theme_dark">
+    <section className={`root__popup popup-image popup popup_theme_dark ${props.card ? 'popup_opened' : ''}`}>
       <div className="popup-image__container">
-        <button type="button" className="popup-image__button-cross popup__button-cross button"></button>
-        <img src="#" alt="Картинка" className="popup-image__img" />
-        <h3 className="popup-image__title"></h3>
+        <button type="button" className="popup-image__button-cross popup__button-cross button" onClick={props.onClose}></button>
+        {/* <div className="popup-image__img" style={{ backgroundImage: `url(${props.card.link})` }} ></div> */}
+        <img src={`${props.card.link}`} alt="Картинка" class="popup-image__img"></img>
+        <h3 className="popup-image__title">{props.card.name}</h3>
       </div>
-    </section>
+    </section >
   );
 }
 

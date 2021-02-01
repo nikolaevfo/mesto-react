@@ -10,6 +10,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState('');
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -23,10 +24,15 @@ function App() {
     setIsAddPlacePopupOpen(true);
   }
 
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
+
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setSelectedCard(false);
   }
 
   return (
@@ -38,6 +44,7 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
+          handleCardClick={handleCardClick}
         />
         <Footer />
       </div>
@@ -64,22 +71,10 @@ function App() {
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       />
-      <ImagePopup />
-
-      <template id="card-template" className="card-template">
-        <article className="card">
-          <button type="button" className="card__trash button"></button>
-          <img src="<%=require('./images/sidorovi-gori.jpg')%>" alt="Картинка" className="card__img" />
-          <div className="card__row">
-            <h3 className="card__title">Сидоровы горы</h3>
-            <div className="card__like-items">
-              <button type="button" className="card__like button"></button>
-              <p className="card__like-quantity"></p>
-            </div>
-
-          </div>
-        </article>
-      </template>
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
       {/*  
       <section className="popup-profile popup root__popup">
         <div className="popup-profile__container popup__container">
