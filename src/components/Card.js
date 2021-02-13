@@ -27,13 +27,14 @@ function Card(props) {
     props.onCardLike(props.card);
   }
 
-  function handleDeleteClick (){
-    props.onCardDelete(props.card);
+  function handleDeleteClick(e) {
+    props.checkCardDelete(e.target.id); 
+    props.onCardDeleteClick();
   }
 
   return (
-    <article className="card">
-      <button type="button" className={ cardDeleteButtonClassName } onClick={handleDeleteClick }></button>
+    <article className="card" >
+      <button type="button" className={ cardDeleteButtonClassName } onClick={handleDeleteClick} id={props.id}></button>
       <div className="card__img" style={{ backgroundImage: `url(${props.card.link})` }} onClick={handleClick}></div>
       <div className="card__row">
         <h3 className="card__title">{props.card.name}</h3>

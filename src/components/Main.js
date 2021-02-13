@@ -29,10 +29,12 @@ function Main(props) {
         {props.cards.map((item) => (
           <Card
             key={item._id}
+            id={item._id}
             card={item}
             onCardClick={props.handleCardClick}
             onCardLike={props.onCardLike}
-            onCardDelete={props.onCardDelete}
+            checkCardDelete={props.checkCardDelete}
+            onCardDeleteClick={props.onCardDeleteClick}
           />
         ))}
       </section>
