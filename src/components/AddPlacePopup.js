@@ -18,7 +18,8 @@ function AddPlacePopup(props) {
     props.onAddPlace({
       name: placeNameRef.current,
       link: placeLinkRef.current,
-    })
+    });
+    
   }
   
   return (
