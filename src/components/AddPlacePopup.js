@@ -14,6 +14,7 @@ function AddPlacePopup(props) {
   }
 
   function handleSubmit(e) {
+    console.log(e);
     e.preventDefault();
     props.onAddPlace({
       name: placeNameRef.current,

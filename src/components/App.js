@@ -132,24 +132,6 @@ function App() {
           onUpdateUser={handleUpdateUser}
         /> 
 
-        {/* <PopupWithForm
-          name='card'
-          title='Новое место'
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          children={
-            <>
-              <input type="text" name="popupInputPlace" placeholder="Название"
-                className="popup-card__text popup__text popup-card__text_type_place popup__input" id="card-place" required
-                minLength="2" maxLength="30" />
-              <span id="card-place-error" className="popup__text-error"></span>
-              <input type="url" name="popupInputLink" placeholder="Ссылка на картинку"
-                className="popup-card__text popup__text popup-card__text_type_link popup__input" id="card-link" required />
-              <span id="card-link-error" className="popup__text-error"></span>
-            </>
-          }
-        /> */}
-
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
