@@ -9,7 +9,7 @@ function PopupWithForm(props) {
     formRef.current.reset();
   }
 
-  let buttonText = '';
+  let buttonText = '';  
   if(props.isDeletingCard) {
     if (props.isLoading) {
       buttonText = 'Да...'

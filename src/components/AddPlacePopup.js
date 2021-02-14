@@ -9,6 +9,14 @@ function AddPlacePopup(props) {
   const placeNameRef = React.useRef();
   const placeLinkRef = React.useRef();
 
+  // обнуление ошибок инпутов и значений полей ввода
+  React.useEffect(() => {
+    placeNameRef.current.value = '';
+    placeLinkRef.current.value = '';
+    setErrorTextPlaceInput('');
+    setErrorTextLinkInput('')
+  }, [props.isOpen]); 
+
   function handlePlaceNameChange(e) {
     setErrorTextPlaceInput(placeNameRef.current.validationMessage)
     placeNameRef.current.value = e.target.value; 

@@ -17,12 +17,13 @@ function EditProfilePopup(props) {
   React.useEffect(() => {
     setName(currentUser.name || '');
     setDescription(currentUser.about || '');
-  }, [currentUser]); 
+    setErrorTextAboutInput('');
+    setErrorTextNameInput('')
+  }, [currentUser, props.isOpen]); 
 
   function handleNameChange(e) {
     setName(e.target.value);
     setErrorTextNameInput(inputNameRef.current.validationMessage)
-    console.log(inputNameRef.current);
   }
   
   function handleDescriptionChange(e) {

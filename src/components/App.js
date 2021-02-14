@@ -29,8 +29,8 @@ function App() {
     api.getUserInfo()
       .then((userData) => {
       setCurrentUser(userData); 
-    })
-    .catch((err) => console.log("Ошибка при загрузке данных", err));
+      })
+      .catch((err) => console.log("Ошибка при загрузке данных", err));
   }, [])
 
 
@@ -74,6 +74,7 @@ function App() {
         setIsLoading(false);
         closeAllPopups();
       })
+      .catch((err) => console.log("Ошибка при загрузке данных", err));
   }
 
   // avatar
@@ -84,7 +85,8 @@ function App() {
         setCurrentUser(userData); 
         setIsLoading(false);
         closeAllPopups();
-    })
+      })
+      .catch((err) => console.log("Ошибка при загрузке данных аватара", err));
   }
 
   // cards
@@ -93,7 +95,7 @@ function App() {
       .then((initialCards) => {
         setCards(initialCards);
       })
-      .catch((err) => console.log("Ошибка при загрузке данных", err));
+      .catch((err) => console.log("Ошибка при загрузке данных карточек", err));
   }, []);
 
   function handleCardLike(card) {
@@ -102,7 +104,8 @@ function App() {
       .then((newCard) => {
         const newCards = cards.map((c) => c._id === card._id ? newCard : c);
         setCards(newCards);
-      });
+      })
+      .catch((err) => console.log("Ошибка при загрузке данных", err));
   } 
 
   function checkDeletedCardId(cardId) {
@@ -118,6 +121,7 @@ function App() {
         setIsLoading(false);
         closeAllPopups();
       })
+      .catch((err) => console.log("Ошибка при удалении карточки", err));
   }
 
   // card
@@ -128,8 +132,23 @@ function App() {
         setCards([newCard, ...cards]); 
         setIsLoading(false);
         closeAllPopups();
-    })
+      })
+      .catch((err) => console.log("Ошибка при добавлении карточки", err));
   }
+
+  // закрытие по Esc
+  React.useEffect(() => {
+    function handleEscClose(evt) {
+      if (evt.key === "Escape") {
+        closeAllPopups();
+      }
+    }
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    }
+  })
+
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
