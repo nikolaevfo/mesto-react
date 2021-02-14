@@ -3,24 +3,27 @@ import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
 
+  const [errorTextPlaceInput, setErrorTextPlaceInput] = React.useState('');
+  const [errorTextLinkInput, setErrorTextLinkInput] = React.useState('');
+
   const placeNameRef = React.useRef();
   const placeLinkRef = React.useRef();
 
   function handlePlaceNameChange(e) {
-    placeNameRef.current = e.target.value;
+    setErrorTextPlaceInput(placeNameRef.current.validationMessage)
+    placeNameRef.current.value = e.target.value; 
   }
   function handlePlaceLinkChange(e) {
-    placeLinkRef.current = e.target.value;
+    placeLinkRef.current.value = e.target.value;
+    setErrorTextLinkInput(placeLinkRef.current.validationMessage)
   }
 
   function handleSubmit(e) {
-    console.log(e);
     e.preventDefault();
     props.onAddPlace({
-      name: placeNameRef.current,
-      link: placeLinkRef.current,
+      name: placeNameRef.current.value,
+      link: placeLinkRef.current.value,
     });
-    
   }
   
   return (
@@ -38,12 +41,12 @@ function AddPlacePopup(props) {
             minLength="2" maxLength="30"
             onChange={handlePlaceNameChange} ref={placeNameRef}
           />
-          <span id="card-place-error" className="popup__text-error"></span>
+          <span id="card-place-error" className="popup__text-error">{errorTextPlaceInput}</span>
           <input type="url" name="popupInputLink" placeholder="Ссылка на картинку"
             className="popup-card__text popup__text popup-card__text_type_link popup__input" id="card-link" required
             onChange={handlePlaceLinkChange} ref={placeLinkRef}
           />
-          <span id="card-link-error" className="popup__text-error"></span>
+          <span id="card-link-error" className="popup__text-error">{errorTextLinkInput}</span>
         </>
       }
     />

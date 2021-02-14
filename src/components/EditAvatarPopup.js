@@ -6,6 +6,9 @@ function EditAvatarPopup(props) {
 
   const currentUser = React.useContext(CurrentUserContext);
   const avatarLinkRef = React.useRef();
+  const [errorTextAvatarInput, setErrorTextAvatarInput] = React.useState('');
+  
+  const inputAvatarRef = React.useRef();
   
   React.useEffect(() => {
     avatarLinkRef.current = currentUser.avatar;
@@ -14,6 +17,7 @@ function EditAvatarPopup(props) {
 
   function handleLinkChange(e) {
     avatarLinkRef.current = e.target.value;
+    setErrorTextAvatarInput(inputAvatarRef.current.validationMessage)
   }
 
   function handleSubmit(e) {
@@ -35,8 +39,8 @@ function EditAvatarPopup(props) {
         <>
           <input type="url" name="avatarInputLink" placeholder="Ссылка на картинку"
             className="popup-avatar__text popup__text popup-avatar__text_type_link popup__input" id="avatar-link" required
-            onChange={handleLinkChange} ref={avatarLinkRef} />
-          <span id="avatar-link-error" className="popup__text-error"></span>
+            onChange={handleLinkChange} ref={avatarLinkRef} ref={inputAvatarRef} />
+          <span id="avatar-link-error" className="popup__text-error">{errorTextAvatarInput}</span>
         </>
       } 
     />
