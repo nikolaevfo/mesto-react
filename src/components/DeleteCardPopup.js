@@ -16,6 +16,7 @@ function DeleteCardPopup(props) {
       onClose={props.onClose}
       onSubmit={handleSubmit}
       isLoading={props.isLoading}
+      isDeletingCard={props.isDeletingCard}
       children={
         <></>
       } 

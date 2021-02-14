@@ -19,6 +19,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState('');
   const [deletedCardId, setDeletedCardId] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isDeletingCard, setIsDeletingCard] = React.useState(false);
 
   const [currentUser, setCurrentUser] = React.useState({});
 
@@ -51,6 +52,7 @@ function App() {
   }
 
   function handleDeleteCardClick(card) {
+    setIsDeletingCard(true);
     setIsDeleteCardPopupOpen(true);    
   }
 
@@ -60,10 +62,11 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard(false);
     setIsDeleteCardPopupOpen(false);
+    setIsDeletingCard(false);
   }
 
   // profile
-  function handleUpdateUser(userData) {        
+  function handleUpdateUser(userData) {
     setIsLoading(true)
     api.setUserInfo(userData)
       .then((newUserData) => {         
@@ -107,7 +110,7 @@ function App() {
   }
 
   function handleCardDelete() {
-    setIsLoading(true)
+    setIsLoading(true);
     api.deleteCard(deletedCardId)
       .then(() => {
         const newCards = cards.filter((c) => c._id !== deletedCardId);
@@ -178,6 +181,7 @@ function App() {
         onClose={closeAllPopups}
         onDeleteCard={handleCardDelete}
         isLoading={isLoading}
+        isDeletingCard={isDeletingCard}
         />
 
       </div >
