@@ -3,7 +3,6 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import ImagePopup from './ImagePopup';
-import PopupWithForm from './PopupWithForm';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
@@ -19,6 +18,7 @@ function App() {
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState('');
   const [deletedCardId, setDeletedCardId] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [currentUser, setCurrentUser] = React.useState({});
 
@@ -63,19 +63,23 @@ function App() {
   }
 
   // profile
-  function handleUpdateUser(userData) {    
+  function handleUpdateUser(userData) {        
+    setIsLoading(true)
     api.setUserInfo(userData)
       .then((newUserData) => {         
-        setCurrentUser(newUserData);
+        setCurrentUser(newUserData);        
+        setIsLoading(false);
         closeAllPopups();
       })
   }
 
   // avatar
   function handleUpdateAvatar(avatarObj) {
+    setIsLoading(true)
     api.setUserAvatar(avatarObj.avatar)
       .then((userData) => {
         setCurrentUser(userData); 
+        setIsLoading(false);
         closeAllPopups();
     })
   }
@@ -99,23 +103,27 @@ function App() {
   } 
 
   function checkDeletedCardId(cardId) {
-    setDeletedCardId(cardId);    
+    setDeletedCardId(cardId);
   }
 
   function handleCardDelete() {
+    setIsLoading(true)
     api.deleteCard(deletedCardId)
       .then(() => {
         const newCards = cards.filter((c) => c._id !== deletedCardId);
         setCards(newCards); 
+        setIsLoading(false);
         closeAllPopups();
       })
   }
 
   // card
   function handleAddPlaceSubmit(card) {
+    setIsLoading(true)
     api.addCard(card)
       .then((newCard) => {
         setCards([newCard, ...cards]); 
+        setIsLoading(false);
         closeAllPopups();
     })
   }
@@ -143,18 +151,21 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          isLoading={isLoading}
         /> 
 
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          isLoading={isLoading}
         />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          isLoading={isLoading}
         />
 
         <ImagePopup
@@ -166,6 +177,7 @@ function App() {
         isOpen={isDeleteCardPopupOpen}
         onClose={closeAllPopups}
         onDeleteCard={handleCardDelete}
+        isLoading={isLoading}
         />
 
       </div >

@@ -30,6 +30,7 @@ function EditAvatarPopup(props) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
+      isLoading={props.isLoading}
       children={
         <>
           <input type="url" name="avatarInputLink" placeholder="Ссылка на картинку"
