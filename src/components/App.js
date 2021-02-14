@@ -16,7 +16,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState('');
+  const [selectedCard, setSelectedCard] = React.useState(false);
   const [deletedCardId, setDeletedCardId] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
   const [isDeletingCard, setIsDeletingCard] = React.useState(false);
@@ -60,7 +60,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
-    setSelectedCard('');
+    setSelectedCard(false);
     setIsDeleteCardPopupOpen(false);
     setIsDeletingCard(false);
   }
