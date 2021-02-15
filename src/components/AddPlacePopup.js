@@ -19,10 +19,10 @@ function AddPlacePopup(props) {
 
   function handlePlaceNameChange(e) {
     setErrorTextPlaceInput(placeNameRef.current.validationMessage)
-    placeNameRef.current.value = e.target.value; 
+    // placeNameRef.current.value = e.target.value; 
   }
   function handlePlaceLinkChange(e) {
-    placeLinkRef.current.value = e.target.value;
+    // placeLinkRef.current.value = e.target.value;
     setErrorTextLinkInput(placeLinkRef.current.validationMessage)
   }
 
