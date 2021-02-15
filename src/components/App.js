@@ -53,7 +53,7 @@ function App() {
 
   function handleDeleteCardClick(card) {
     setIsDeletingCard(true);
-    setIsDeleteCardPopupOpen(true);    
+    setIsDeleteCardPopupOpen(true);
   }
 
   function closeAllPopups() {
@@ -69,8 +69,8 @@ function App() {
   function handleUpdateUser(userData) {
     setIsLoading(true)
     api.setUserInfo(userData)
-      .then((newUserData) => {         
-        setCurrentUser(newUserData);        
+      .then((newUserData) => {
+        setCurrentUser(newUserData);
         setIsLoading(false);
         closeAllPopups();
       })
@@ -136,16 +136,26 @@ function App() {
       .catch((err) => console.log("Ошибка при добавлении карточки", err));
   }
 
-  // закрытие по Esc
+  // закрытие по Esc и оверлею
   React.useEffect(() => {
     function handleEscClose(evt) {
       if (evt.key === "Escape") {
         closeAllPopups();
       }
     }
+    function handleOverlayClose(evt) {
+       if (
+        evt.target.classList.contains("popup") ||
+        evt.target.classList.contains("popup__button-cross")
+      ) {
+        closeAllPopups();
+      }
+    }
     document.addEventListener("keydown", handleEscClose);
+    document.addEventListener("click", handleOverlayClose);
     return () => {
       document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener("click", handleOverlayClose);
     }
   })
 
@@ -168,7 +178,7 @@ function App() {
           />
           <Footer />
         </div>
-        
+
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
@@ -204,7 +214,7 @@ function App() {
         />
 
       </div >
-    </CurrentUserContext.Provider>    
+    </CurrentUserContext.Provider>
   );
 }
 
