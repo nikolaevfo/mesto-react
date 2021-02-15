@@ -10,12 +10,12 @@ function EditAvatarPopup(props) {
   
   // обнуление ошибок инпута и значения поля ввода
   React.useEffect(() => {
-    avatarLinkRef.current.value = '';
+    avatarLinkRef.current.value = currentUser.avatar || '';
     setErrorTextAvatarInput('');
   }, [props.isOpen]); 
 
   function handleLinkChange(e) {
-    avatarLinkRef.current.value = e.target.value;
+    // avatarLinkRef.current.value = e.target.value;
     setErrorTextAvatarInput(avatarLinkRef.current.validationMessage);
   }
 
